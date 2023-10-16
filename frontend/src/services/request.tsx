@@ -6,6 +6,7 @@ const api = axios.create({
 
 const request = {
   login: (credentials: {email: string, password: string}) => api.post('/auth/login', credentials),
+  getPosts: (headers: {headers: { authorization: string}}) => api.get('/posts', headers),
 };
 
 export default request;

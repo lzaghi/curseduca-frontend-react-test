@@ -1,8 +1,14 @@
-import React from 'react'
+'use client'
+
+import Editor from "@/components/Editor"
+import Posts from "@/components/Posts"
 
 function Feed() {
   return (
-    <div>Feed</div>
+    <main>
+      <Editor />
+      <Posts />
+    </main>
   )
 }
 

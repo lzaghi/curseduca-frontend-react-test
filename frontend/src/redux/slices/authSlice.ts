@@ -21,7 +21,6 @@ export const auth = createSlice({
   initialState,
   reducers: {
     loginAction: (_state, action: PayloadAction<string>) => {
-      console.log('action', action)
       return {
         value: {
           token: action.payload,

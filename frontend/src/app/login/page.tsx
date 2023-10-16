@@ -1,7 +1,10 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
-import request from '@/services/request';
+import request from '../../services/request';
+import { loginAction } from '@/redux/slices/authSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/redux/store';
 
 function Login() {
   const [user, setUser] = useState({
@@ -13,16 +16,17 @@ function Login() {
   const [error, setError] = useState('');
 
   const { push } = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const login = async (e) => {
+  const login = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     try {
       const { data: { access_token } } = await request.login(user);
-      console.log(access_token)
-
+      dispatch(loginAction(access_token));
+      
       push('/feed');
-    } catch (error) {
+    } catch (error: any) {
       setError(error);
     } finally {
       setLoading(false);
@@ -38,7 +42,7 @@ function Login() {
   }, [user.email, user.password,]);
 
   return (
-    <>
+    <main>
       <form onSubmit={ login }>
           <input
             type="email"
@@ -61,7 +65,7 @@ function Login() {
       </form>
       { loading && <p>Loading...</p> }
       { error && <p>{error}</p> }
-    </>
+    </main>
   )
 }
 
