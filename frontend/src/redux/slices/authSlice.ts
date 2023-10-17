@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type AuthState = {
   token: string;
-  isAuthenticated: boolean;
 }
 
 type InitialState = {
@@ -12,7 +11,6 @@ type InitialState = {
 const initialState = {
   value: {
     token: "",
-    isAuthenticated: false,
   } as AuthState
 } as InitialState;
 
@@ -24,7 +22,6 @@ export const auth = createSlice({
       return {
         value: {
           token: action.payload,
-          isAuthenticated: true,
         }
       }
     }

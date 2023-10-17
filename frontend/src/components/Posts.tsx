@@ -2,28 +2,11 @@
 import { useAppSelector } from '@/redux/store';
 import request from '@/services/request';
 import React, { useEffect, useState } from 'react'
-
-type Post = {
-  id: number,
-  title: string,
-  text: string,
-  id_user: number,
-  id_category: number
-}
-
-type Category = {
-  id: number,
-  name: string
-}
-
-type User = {
-  id: number,
-  email: string
-}
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/redux/store';
+import { setPostsAction } from '@/redux/slices/postSlice';
 
 function Posts() {
-  const [posts, setPosts] = useState([]);
-  const [categories, setCategories] = useState([])
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -33,6 +16,10 @@ function Posts() {
   })
 
   const { token } = useAppSelector((state) => state.authReducer.value);
+  const { posts } = useAppSelector((state) => state.postsReducer.value);
+  const { categories } = useAppSelector((state) => state.postsReducer.value);
+  console.log(categories)
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter({
@@ -58,10 +45,8 @@ function Posts() {
       try {
         const headers = { headers: { authorization: `Bearer ${token}` } }
         const posts = await request.getPosts(headers);
-        const categories = await request.getCategories(headers);
         const users = await request.getUsers(headers);
-        setPosts(posts.data);
-        setCategories(categories.data);
+        dispatch(setPostsAction(posts.data.reverse()));
         setUsers(Object.values(users.data));
       } catch (error: any) {
         setError(error)
@@ -70,7 +55,7 @@ function Posts() {
       }
     }
     fetchPosts();
-  }, [token])
+  }, [token, dispatch])
 
   return (
     <section>
