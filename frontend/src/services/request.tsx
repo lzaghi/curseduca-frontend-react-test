@@ -20,6 +20,7 @@ const request = {
   getPosts: (headers: Headers) => api.get('/posts', headers),
   getCategories: (headers: Headers) => api.get('/categories', headers),
   getUsers: (headers: Headers) => api.get('/users', headers),
+  createPost: (body: any, headers: any) => api.post('/posts', body, headers),
 };
 
 export default request;

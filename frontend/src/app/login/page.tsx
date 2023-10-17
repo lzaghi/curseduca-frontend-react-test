@@ -27,11 +27,9 @@ function Login() {
       
       push('/feed');
     } catch (error: any) {
-      setError(error);
-    } finally {
       setLoading(false);
-    }
-
+      setError(error);
+    } 
   }
 
   useEffect(() => {
