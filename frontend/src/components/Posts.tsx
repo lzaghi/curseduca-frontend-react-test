@@ -1,13 +1,11 @@
 'use client'
-import { useAppSelector } from '@/redux/store';
+import { setPostsAction } from '@/redux/slices/feedSlice';
+import { AppDispatch, useAppSelector } from '@/redux/store';
 import request from '@/services/request';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/redux/store';
-import { setPostsAction } from '@/redux/slices/postSlice';
 
 function Posts() {
-  const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [filter, setFilter] = useState({
@@ -15,10 +13,9 @@ function Posts() {
     category: '',
   })
 
-  const { token } = useAppSelector((state) => state.authReducer.value);
-  const { posts } = useAppSelector((state) => state.postsReducer.value);
-  const { categories } = useAppSelector((state) => state.postsReducer.value);
-  console.log(categories)
+  const { token, email } = useAppSelector(state => state.authReducer.value);
+  const { posts, categories, users } = useAppSelector((state) => state.postsReducer.value);
+
   const dispatch = useDispatch<AppDispatch>();
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -39,23 +36,17 @@ function Posts() {
     return filteredPosts;
   }
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      try {
-        const headers = { headers: { authorization: `Bearer ${token}` } }
-        const posts = await request.getPosts(headers);
-        const users = await request.getUsers(headers);
-        dispatch(setPostsAction(posts.data.reverse()));
-        setUsers(Object.values(users.data));
-      } catch (error: any) {
-        setError(error)
-      } finally {
-        setLoading(false);
-      }
+  const deletePost = async (id: number) => {
+    try {
+      const headers = { headers: { authorization: `Bearer ${token}` } }
+      await request.deletePost(id, headers);
+
+      const updatedPosts = await request.getPosts(headers);
+      dispatch(setPostsAction(updatedPosts.data.reverse()));
+    } catch (error) {
+      console.log(error)
     }
-    fetchPosts();
-  }, [token, dispatch])
+  }
 
   return (
     <section>
@@ -111,6 +102,16 @@ function Posts() {
                     <p>Dev {post.id_user}</p>
                     <p>{categories.find((category: {id: number}) => category.id === post.id_category)?.name}</p>
                     <p dangerouslySetInnerHTML={ { __html: post.text } } />
+                    {
+                      users.find((user) => user.email === email)?.id === post.id_user && (
+                        <button
+                          type='button'
+                          onClick={ () => deletePost(post.id)}
+                        >
+                          Delete post
+                        </button>
+                      )
+                    }
                   </article>
                 ))
               }

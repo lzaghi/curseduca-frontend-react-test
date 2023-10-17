@@ -21,6 +21,7 @@ const request = {
   getCategories: (headers: Headers) => api.get('/categories', headers),
   getUsers: (headers: Headers) => api.get('/users', headers),
   createPost: (body: any, headers: any) => api.post('/posts', body, headers),
+  deletePost: (id: number, headers: Headers) => api.delete(`/posts/${id}`, headers),
 };
 
 export default request;

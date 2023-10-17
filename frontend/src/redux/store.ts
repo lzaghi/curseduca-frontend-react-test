@@ -1,7 +1,7 @@
 'use client'
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './slices/authSlice'
-import postsReducer from './slices/postSlice'
+import postsReducer from './slices/feedSlice'
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
 export const store = configureStore({

@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 type PostsState = {
   posts: Post[];
   categories: Category[];
+  users: User[];
 }
 
 type InitialState = {
@@ -13,6 +14,7 @@ const initialState = {
   value: {
     posts: [],
     categories: [],
+    users: [],
   } as PostsState
 } as InitialState;
 
@@ -35,9 +37,17 @@ export const posts = createSlice({
           categories: action.payload,
         }
       }
+    },
+    setUsersAction: (state, action: PayloadAction<User[]>) => {
+      return {
+        value: {
+          ...state.value,
+          users: action.payload,
+        }
+      }
     }
   }
 })
 
-export const { setPostsAction, setCategoriesAction } = posts.actions;
+export const { setPostsAction, setCategoriesAction, setUsersAction } = posts.actions;
 export default posts.reducer;

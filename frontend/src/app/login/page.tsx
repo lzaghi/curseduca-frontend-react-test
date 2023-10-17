@@ -23,7 +23,7 @@ function Login() {
     setLoading(true);
     try {
       const { data: { access_token } } = await request.login(user);
-      dispatch(loginAction(access_token));
+      dispatch(loginAction({token: access_token, email: user.email}));
       
       push('/feed');
     } catch (error: any) {
