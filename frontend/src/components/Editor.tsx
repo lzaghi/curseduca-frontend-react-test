@@ -9,6 +9,7 @@ import { useAppSelector } from '@/redux/store';
 import { AppDispatch } from '@/redux/store';
 import { setPostsAction } from '@/redux/slices/feedSlice';
 import { useDispatch } from 'react-redux';
+import { dateFormatter } from '@/helpers/dateHandler';
 
 function EditorComponent() {
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
@@ -28,6 +29,7 @@ function EditorComponent() {
       text: draftToHtml(convertToRaw(editorState.getCurrentContent())),
       id_user: users.find((user) => user.email === email)?.id,
       id_category: +category,
+      date: dateFormatter(new Date()),
     }
     try {
       await request.createPost(body, headers);

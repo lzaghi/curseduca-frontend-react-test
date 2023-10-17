@@ -1,4 +1,5 @@
 'use client'
+import { customDate } from '@/helpers/dateHandler';
 import { setPostsAction } from '@/redux/slices/feedSlice';
 import { AppDispatch, useAppSelector } from '@/redux/store';
 import request from '@/services/request';
@@ -102,6 +103,7 @@ function Posts() {
                     <p>Dev {post.id_user}</p>
                     <p>{categories.find((category: {id: number}) => category.id === post.id_category)?.name}</p>
                     <p dangerouslySetInnerHTML={ { __html: post.text } } />
+                    <p>{customDate(post.date)}</p>
                     {
                       users.find((user) => user.email === email)?.id === post.id_user && (
                         <button

@@ -3,7 +3,8 @@ type Post = {
   title: string,
   text: string,
   id_user: number,
-  id_category: number
+  id_category: number,
+  date: string
 }
 
 type Category = {
