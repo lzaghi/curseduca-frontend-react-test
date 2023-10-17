@@ -16,3 +16,7 @@ type User = {
   id: number,
   email: string
 }
+
+// date-time-picker types
+type ValuePiece = Date | null;
+type Value = ValuePiece | [ValuePiece, ValuePiece];

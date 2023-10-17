@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html'
@@ -10,15 +10,22 @@ import { AppDispatch } from '@/redux/store';
 import { setPostsAction } from '@/redux/slices/feedSlice';
 import { useDispatch } from 'react-redux';
 import { dateFormatter } from '@/helpers/dateHandler';
+import SchedulerModal from '@/modals/scheduler';
 
 function EditorComponent() {
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState('1')
+  const [disabled, setDisabled] = useState(false)
 
   const { token, email } = useAppSelector(state => state.authReducer.value);
   const { categories, users } = useAppSelector((state) => state.postsReducer.value);
   const dispatch = useDispatch<AppDispatch>();
+
+  const resetEditor = () => {
+    setEditorState(EditorState.createEmpty());
+    setTitle('');
+  }
 
   const publishPost = async () => {
     const headers = { 
@@ -33,14 +40,17 @@ function EditorComponent() {
     }
     try {
       await request.createPost(body, headers);
-      setEditorState(EditorState.createEmpty());
-      setTitle('');
+      resetEditor();
       const posts = await request.getPosts(headers);
       dispatch(setPostsAction(posts.data.reverse()));
     } catch (error) {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    setDisabled(!title || !editorState.getCurrentContent().hasText())
+  }, [title, editorState])
 
   return (
     <section>
@@ -72,12 +82,11 @@ function EditorComponent() {
         editorClassName="demo-editor"
         onEditorStateChange={(editorState) => setEditorState(editorState)}
       />
-      <button>
-        Schedule post
-      </button>
+      <SchedulerModal resetEditor={resetEditor} disabled={disabled}/>
       <button
         type='button'
         onClick={ publishPost }
+        disabled={disabled}
       >
         Publish
       </button>
