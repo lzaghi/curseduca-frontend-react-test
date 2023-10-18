@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { customDate } from '../helpers/dateHandler';
 import DeleteModal from '../modals/delete';
 import { useAppSelector } from '../redux/store';
@@ -7,6 +7,13 @@ import { TPost } from '../types/types';
 function Post({ post, deletePost }: { post: TPost, deletePost: (id: number) => void }) {
   const { email } = useAppSelector((state) => state.authReducer.value);
   const { categories, users } = useAppSelector((state) => state.postsReducer.value);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (textRef.current) {
+      textRef.current.innerHTML = post.text;
+    }
+  }, [textRef, post]);
 
   return (
     <article key={post.id}>
@@ -17,7 +24,7 @@ function Post({ post, deletePost }: { post: TPost, deletePost: (id: number) => v
         {` ${post.id_user}`}
       </p>
       <p>{categories.find((category: {id: number}) => category.id === post.id_category)?.name}</p>
-      <p dangerouslySetInnerHTML={{ __html: post.text }} />
+      <div ref={textRef} />
       <p>{customDate(post.date)}</p>
       {
           users.find((user) => user.email === email)?.id === post.id_user && (
