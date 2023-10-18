@@ -14,7 +14,7 @@ import { dateFormatter } from '../helpers/dateHandler';
 import SchedulerModal from '../modals/scheduler';
 import 'react-toastify/dist/ReactToastify.css';
 import { TCategory } from '../types/types';
-import { fetchPosts } from '../services/fetch';
+import { setPostsAction } from '../redux/slices/feedSlice';
 
 function EditorComponent() {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -47,8 +47,9 @@ function EditorComponent() {
     try {
       await request.createPost(body, headers);
       resetEditor();
-      fetchPosts(dispatch, token);
-      toast.success('Post published successfully!');
+      const { data } = await request.getPosts(headers);
+      dispatch(setPostsAction(data.reverse()));
+      toast.success('Publicado com sucesso!');
     } catch (error: any) {
       if (error?.response?.data?.status === 401) {
         push('/login');

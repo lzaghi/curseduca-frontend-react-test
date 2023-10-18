@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { AppDispatch } from '../redux/store';
 import 'react-toastify/dist/ReactToastify.css';
-import { fetchToken } from '../services/fetch';
+import { loginAction } from '../redux/slices/authSlice';
+import request from '../services/request';
 
 function LoginForm() {
   const [user, setUser] = useState({
@@ -23,7 +24,8 @@ function LoginForm() {
     event.preventDefault();
     setLoading(true);
     try {
-      fetchToken(dispatch, user);
+      const { data } = await request.login(user);
+      dispatch(loginAction({ token: data.access_token, email: user.email }));
       push('/feed');
     } catch (error: any) {
       setLoading(false);

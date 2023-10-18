@@ -9,7 +9,7 @@ import request from '../services/request';
 import Post from './Post';
 import 'react-toastify/dist/ReactToastify.css';
 import { TPost, TCategory, TUser } from '../types/types';
-import { fetchPosts } from '../services/fetch';
+import { setPostsAction } from '../redux/slices/feedSlice';
 
 function PostList() {
   const [filter, setFilter] = useState({
@@ -45,8 +45,9 @@ function PostList() {
     try {
       const headers = { headers: { authorization: `Bearer ${token}` } };
       await request.deletePost(id, headers);
-      fetchPosts(dispatch, token);
-      toast.success('Post deleted');
+      const { data } = await request.getPosts(headers);
+      dispatch(setPostsAction(data.reverse()));
+      toast.success('Post deletado');
     } catch (error: any) {
       if (error?.response?.data?.status === 401) {
         push('/login');

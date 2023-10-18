@@ -8,7 +8,8 @@ import Editor from '../../components/Editor';
 import PostList from '../../components/PostList';
 import { useAppSelector, AppDispatch } from '../../redux/store';
 import 'react-toastify/dist/ReactToastify.css';
-import { fetchFeed } from '../../services/fetch';
+import request from '../../services/request';
+import { setCategoriesAction, setPostsAction, setUsersAction } from '../../redux/slices/feedSlice';
 
 function Feed() {
   const [loading, setLoading] = useState(false);
@@ -23,7 +24,13 @@ function Feed() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        fetchFeed(dispatch, token);
+        const headers = { headers: { authorization: `Bearer ${token}` } };
+        const posts = await request.getPosts(headers);
+        const categories = await request.getCategories(headers);
+        const users = await request.getUsers(headers);
+        dispatch(setPostsAction(posts.data.reverse()));
+        dispatch(setCategoriesAction(categories.data));
+        dispatch(setUsersAction(Object.values(users.data)));
       } catch (error: any) {
         setLoading(false);
         if (error?.response?.data?.status === 401) {
