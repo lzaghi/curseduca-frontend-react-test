@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import { EditorState, convertToRaw } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
+import dynamic from 'next/dynamic';
 import request from '../services/request';
 import { useAppSelector, AppDispatch } from '../redux/store';
 import { dateFormatter } from '../helpers/dateHandler';
@@ -15,6 +15,11 @@ import SchedulerModal from '../modals/scheduler';
 import 'react-toastify/dist/ReactToastify.css';
 import { TCategory } from '../types/types';
 import { setPostsAction } from '../redux/slices/feedSlice';
+
+const Editor = dynamic(
+  () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
+  { ssr: false },
+);
 
 function EditorComponent() {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());

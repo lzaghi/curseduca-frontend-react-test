@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import Modal from 'react-modal';
 import { TPost } from '../types/types';
 

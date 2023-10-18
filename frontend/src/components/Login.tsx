@@ -9,11 +9,11 @@ import { AppDispatch } from '../redux/store';
 import 'react-toastify/dist/ReactToastify.css';
 import { loginAction } from '../redux/slices/authSlice';
 import request from '../services/request';
-import styles from './styles/LoginForm.module.css';
+import styles from './styles/Login.module.css';
 import logo from '../assets/logo.png';
 import Loading from './Loading';
 
-function LoginForm() {
+function Login() {
   const [user, setUser] = useState({
     email: 'dev1@curseduca.com',
     password: 'dev1',
@@ -78,4 +78,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default Login;
