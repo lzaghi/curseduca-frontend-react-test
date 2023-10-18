@@ -4,10 +4,14 @@ import React, { useState, useEffect, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
+import Image from 'next/image';
 import { AppDispatch } from '../redux/store';
 import 'react-toastify/dist/ReactToastify.css';
 import { loginAction } from '../redux/slices/authSlice';
 import request from '../services/request';
+import styles from './styles/LoginForm.module.css';
+import logo from '../assets/logo.png';
+import Loading from './Loading';
 
 function LoginForm() {
   const [user, setUser] = useState({
@@ -41,29 +45,35 @@ function LoginForm() {
   }, [user.email, user.password]);
 
   return (
-    <main>
-      <form onSubmit={login}>
-        <input
-          type="email"
-          value={user.email}
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-          placeholder="Senha"
-        />
-        <button
-          type="submit"
-          disabled={disabled}
-        >
-          ENTRAR
-        </button>
-      </form>
+    <main className={styles.background}>
+      <div className={styles.loginCard}>
+        <Image src={logo} alt="logo Curseduca Social Media" className={styles.logo} />
+        <form onSubmit={login} className={styles.loginForm}>
+          <input
+            className={styles.loginInput}
+            type="email"
+            value={user.email}
+            onChange={(e) => setUser({ ...user, email: e.target.value })}
+            placeholder="Email"
+          />
+          <input
+            className={styles.loginInput}
+            type="password"
+            value={user.password}
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            placeholder="Senha"
+          />
+          <button
+            className={styles.loginButton}
+            type="submit"
+            disabled={disabled}
+          >
+            ENTRAR
+          </button>
+        </form>
+        { loading && <div className={styles.loginLoader}><Loading /></div> }
+      </div>
       <ToastContainer />
-      { loading && <p>Loading...</p> }
     </main>
   );
 }
