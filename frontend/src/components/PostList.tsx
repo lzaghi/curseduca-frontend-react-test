@@ -7,6 +7,8 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import Post from './Post';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function PostList() {
   const [error, setError] = useState('');
@@ -47,10 +49,10 @@ function PostList() {
       const updatedPosts = await request.getPosts(headers);
       dispatch(setPostsAction(updatedPosts.data.reverse()));
     } catch (error: any) {
-      if (error.response.data.status === 401) {
+      if (error?.response?.data?.status === 401) {
           push('/login');
         }
-        setError(error.response.data.message || 'Internal error');
+      toast.error(error?.response?.data?.message || 'Internal error');
     }
   }
 
@@ -103,7 +105,8 @@ function PostList() {
             <Post key={post.id} post={post} deletePost={deletePost} />
           ))
         }
-      </section>      
+      </section>  
+      <ToastContainer />    
     </section>
   )
 }

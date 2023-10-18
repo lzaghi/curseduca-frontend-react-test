@@ -9,10 +9,11 @@ import { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
 import { setCategoriesAction, setPostsAction, setUsersAction } from '@/redux/slices/feedSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Feed() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
   const { token } = useAppSelector((state) => state.authReducer.value);
   if (!token) redirect('/login');
@@ -33,18 +34,16 @@ function Feed() {
         dispatch(setUsersAction(Object.values(users.data)));
       } catch (error: any) {
         setLoading(false);
-        if (error.response.data.status === 401) {
+        if (error?.response?.data?.status === 401) {
           push('/login');
         }
-        setError(error.response.data.message || 'Internal error');
+        toast.error(error?.response?.data?.message || 'Internal error');
       } finally {
         setLoading(false);
       }
     }
     fetchFeed();
   }, [token, dispatch, push])
-
-  if (error) return <p>{ error }</p>
   
   return (
     <main>
@@ -56,6 +55,7 @@ function Feed() {
           </>
         )
       }
+      <ToastContainer />
     </main>
   )
 }

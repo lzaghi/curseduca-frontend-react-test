@@ -5,6 +5,8 @@ import request from '../../services/request';
 import { loginAction } from '@/redux/slices/authSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const [user, setUser] = useState({
@@ -13,7 +15,6 @@ function Login() {
   })
   const [isDisabled, setIsDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
   const { push } = useRouter();
   const dispatch = useDispatch<AppDispatch>();
@@ -27,9 +28,8 @@ function Login() {
       
       push('/feed');
     } catch (error: any) {
-      console.log(error)
       setLoading(false);
-      setError(error.message || 'Internal error');
+      toast.error(error?.response?.data?.message || 'Internal error');
     } 
   }
 
@@ -62,8 +62,8 @@ function Login() {
             Login
           </button>
       </form>
+      <ToastContainer />
       { loading && <p>Loading...</p> }
-      { error && <p>{error}</p> }
     </main>
   )
 }

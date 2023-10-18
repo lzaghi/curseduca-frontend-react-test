@@ -12,6 +12,8 @@ import { useDispatch } from 'react-redux';
 import { dateFormatter } from '@/helpers/dateHandler';
 import SchedulerModal from '@/modals/scheduler';
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function EditorComponent() {
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
@@ -47,11 +49,12 @@ function EditorComponent() {
       resetEditor();
       const posts = await request.getPosts(headers);
       dispatch(setPostsAction(posts.data.reverse()));
+      toast.success('Post published successfully!');
     } catch (error: any) {
-      if (error.response.data.status === 401) {
+      if (error?.response?.data?.status === 401) {
           push('/login');
         }
-        setError(error.response.data.message || 'Internal error');
+      toast.error(error?.response?.data?.message || 'Internal error');
     }
   }
 
@@ -99,6 +102,7 @@ function EditorComponent() {
       >
         Publish
       </button>
+      <ToastContainer />
     </section>
   )
 }
