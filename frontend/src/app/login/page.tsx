@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FormEvent } from 'react'
 import { useRouter } from 'next/navigation';
 import request from '../../services/request';
 import { loginAction } from '@/redux/slices/authSlice';
@@ -18,7 +18,7 @@ function Login() {
   const { push } = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
-  const login = async (e: any) => {
+  const login = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -27,8 +27,9 @@ function Login() {
       
       push('/feed');
     } catch (error: any) {
+      console.log(error)
       setLoading(false);
-      setError(error);
+      setError(error.message || 'Internal error');
     } 
   }
 

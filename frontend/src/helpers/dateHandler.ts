@@ -17,6 +17,5 @@ export const customDate = (date: string) => {
   const [hours, minutes] = timePart.split(':');
 
   const customDate = `${day}/${month} ${hours}:${minutes}`;
-
   return customDate;
 }

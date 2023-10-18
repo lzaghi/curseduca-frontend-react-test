@@ -11,16 +11,20 @@ import { setPostsAction } from '@/redux/slices/feedSlice';
 import { useDispatch } from 'react-redux';
 import { dateFormatter } from '@/helpers/dateHandler';
 import SchedulerModal from '@/modals/scheduler';
+import { useRouter } from 'next/navigation';
 
 function EditorComponent() {
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState('1')
   const [disabled, setDisabled] = useState(false)
+  const [error, setError] = useState('');
 
   const { token, email } = useAppSelector(state => state.authReducer.value);
   const { categories, users } = useAppSelector((state) => state.postsReducer.value);
+
   const dispatch = useDispatch<AppDispatch>();
+  const { push } = useRouter();
 
   const resetEditor = () => {
     setEditorState(EditorState.createEmpty());
@@ -43,14 +47,19 @@ function EditorComponent() {
       resetEditor();
       const posts = await request.getPosts(headers);
       dispatch(setPostsAction(posts.data.reverse()));
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.response.data.status === 401) {
+          push('/login');
+        }
+        setError(error.response.data.message || 'Internal error');
     }
   }
 
   useEffect(() => {
     setDisabled(!title || !editorState.getCurrentContent().hasText())
   }, [title, editorState])
+
+  if (error) return <p>{ error }</p>
 
   return (
     <section>

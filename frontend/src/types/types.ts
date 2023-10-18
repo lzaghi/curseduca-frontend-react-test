@@ -17,6 +17,25 @@ type User = {
   email: string
 }
 
+type Credentials = {
+  email: string,
+  password: string
+}
+
+type Header = {
+  headers: {
+    authorization: string
+  }
+}
+
+type postBody = {
+  title: string,
+  text: string,
+  id_user: number | undefined,
+  id_category: number,
+  date: string,
+}
+
 // date-time-picker types
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];

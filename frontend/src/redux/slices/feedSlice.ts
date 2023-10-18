@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type PostsState = {
+type FeedState = {
   posts: Post[];
   categories: Category[];
   users: User[];
 }
 
 type InitialState = {
-  value: PostsState;
+  value: FeedState;
 }
 
 const initialState = {
@@ -15,7 +15,7 @@ const initialState = {
     posts: [],
     categories: [],
     users: [],
-  } as PostsState
+  } as FeedState
 } as InitialState;
 
 export const posts = createSlice({

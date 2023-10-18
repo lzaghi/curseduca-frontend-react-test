@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
+import { dateFormatter } from '@/helpers/dateHandler';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
-import { dateFormatter } from '@/helpers/dateHandler';
 
 const customStyles = {
   content: {
@@ -18,9 +18,9 @@ const customStyles = {
   },
 };
 
-function SchedulerModal({ resetEditor, disabled }: any) {
+function SchedulerModal({ resetEditor, disabled }: { resetEditor: () => void, disabled: boolean }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [value, onChange] = useState<Value>(new Date());
+  const [dateTimeValue, onChange] = useState<Value>(new Date());
   const [scheduled, setScheduled] = useState('');
 
   const openModal = () => {
@@ -33,7 +33,6 @@ function SchedulerModal({ resetEditor, disabled }: any) {
   };
 
   const scheduleDateTime = (datetime: Value) => {
-    console.log(`post is scheduled: ${datetime}`);
     setScheduled(dateFormatter(datetime as Date));
     resetEditor();
   }
@@ -51,12 +50,12 @@ function SchedulerModal({ resetEditor, disabled }: any) {
         <p>When do you want your post to be published?</p>
         <DateTimePicker
           onChange={onChange}
-          value={value}
+          value={dateTimeValue}
           minDate={new Date()}
           clearIcon={null}
           disableClock={true}
         />
-        <button onClick={() => scheduleDateTime(value)}>
+        <button onClick={() => scheduleDateTime(dateTimeValue)}>
           Schedule
         </button>
         <button onClick={closeModal}>Close</button>
