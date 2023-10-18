@@ -1,4 +1,5 @@
 import { customDate } from '@/helpers/dateHandler';
+import DeleteModal from '@/modals/delete';
 import { useAppSelector } from '@/redux/store';
 import React from 'react'
 
@@ -15,12 +16,7 @@ function Post({ post, deletePost }: { post: Post, deletePost: (id: number) => vo
         <p>{customDate(post.date)}</p>
         {
           users.find((user) => user.email === email)?.id === post.id_user && (
-            <button
-              type='button'
-              onClick={ () => deletePost(post.id)}
-            >
-              Delete post
-            </button>
+            <DeleteModal postId={post.id} deletePost={deletePost} />
           )
         }
       </article>

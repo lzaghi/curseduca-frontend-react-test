@@ -48,6 +48,7 @@ function PostList() {
 
       const updatedPosts = await request.getPosts(headers);
       dispatch(setPostsAction(updatedPosts.data.reverse()));
+      toast.success('Post deleted');
     } catch (error: any) {
       if (error?.response?.data?.status === 401) {
           push('/login');
