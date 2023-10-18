@@ -15,6 +15,7 @@
     "draftjs-to-html": "^0.9.1",
     "next": "13.5.4",
     "react": "^18",
+    "react-calendar": "^4.6.1",
     "react-datetime-picker": "^5.5.2",
     "react-dom": "^18",
     "react-draft-wysiwyg": "^1.15.0",
@@ -30,6 +31,8 @@
     "@types/react-draft-wysiwyg": "^1.13.5",
     "@types/react-modal": "^3.16.1",
     "eslint": "^8",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.1.0",
     "eslint-config-next": "13.5.4",
     "typescript": "^5"
   }

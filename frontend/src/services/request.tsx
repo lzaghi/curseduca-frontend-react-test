@@ -1,16 +1,17 @@
 import axios from 'axios';
+import { TCredentials, THeader, TpostBody } from '../types/types';
 
 const api = axios.create({
   baseURL: 'http://localhost:3001',
 });
 
 const request = {
-  login: (credentials: Credentials) => api.post('/auth/login', credentials),
-  getPosts: (headers: Header) => api.get('/posts', headers),
-  getCategories: (headers: Header) => api.get('/categories', headers),
-  getUsers: (headers: Header) => api.get('/users', headers),
-  createPost: (body: postBody, headers: Header) => api.post('/posts', body, headers),
-  deletePost: (id: number, headers: Header) => api.delete(`/posts/${id}`, headers),
+  login: (credentials: TCredentials) => api.post('/auth/login', credentials),
+  getPosts: (headers: THeader) => api.get('/posts', headers),
+  getCategories: (headers: THeader) => api.get('/categories', headers),
+  getUsers: (headers: THeader) => api.get('/users', headers),
+  createPost: (body: TpostBody, headers: THeader) => api.post('/posts', body, headers),
+  deletePost: (id: number, headers: THeader) => api.delete(`/posts/${id}`, headers),
 };
 
 export default request;

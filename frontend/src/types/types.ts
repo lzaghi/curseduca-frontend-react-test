@@ -1,4 +1,4 @@
-type Post = {
+export type TPost = {
   id: number,
   title: string,
   text: string,
@@ -7,28 +7,28 @@ type Post = {
   date: string
 }
 
-type Category = {
+export type TCategory = {
   id: number,
   name: string
 }
 
-type User = {
+export type TUser = {
   id: number,
   email: string
 }
 
-type Credentials = {
+export type TCredentials = {
   email: string,
   password: string
 }
 
-type Header = {
+export type THeader = {
   headers: {
     authorization: string
   }
 }
 
-type postBody = {
+export type TpostBody = {
   title: string,
   text: string,
   id_user: number | undefined,
@@ -37,5 +37,5 @@ type postBody = {
 }
 
 // date-time-picker types
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+export type TValuePiece = Date | null;
+export type TValue = TValuePiece | [TValuePiece, TValuePiece];

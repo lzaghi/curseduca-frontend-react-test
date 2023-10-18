@@ -8,7 +8,7 @@ export const dateFormatter = (currentDate: Date) => {
 
   const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   return formattedDate;
-}
+};
 
 export const customDate = (date: string) => {
   const [datePart, timePart] = date.split(' ');
@@ -18,4 +18,4 @@ export const customDate = (date: string) => {
 
   const customDate = `${day}/${month} ${hours}:${minutes}`;
   return customDate;
-}
+};

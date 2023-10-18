@@ -1,23 +1,23 @@
-'use client'
+'use client';
 
-import { setPostsAction } from '@/redux/slices/feedSlice';
-import { AppDispatch, useAppSelector } from '@/redux/store';
-import request from '@/services/request';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import Post from './Post';
 import { ToastContainer, toast } from 'react-toastify';
+import { setPostsAction } from '../redux/slices/feedSlice';
+import { AppDispatch, useAppSelector } from '../redux/store';
+import request from '../services/request';
+import Post from './Post';
 import 'react-toastify/dist/ReactToastify.css';
+import { TPost, TCategory, TUser } from '../types/types';
 
 function PostList() {
-  const [error, setError] = useState('');
   const [filter, setFilter] = useState({
     author: '',
     category: '',
-  })
+  });
 
-  const { token } = useAppSelector(state => state.authReducer.value);
+  const { token } = useAppSelector((state) => state.authReducer.value);
   const { posts, categories, users } = useAppSelector((state) => state.postsReducer.value);
 
   const dispatch = useDispatch<AppDispatch>();
@@ -27,23 +27,23 @@ function PostList() {
     setFilter({
       ...filter,
       [event.target.name]: event.target.value,
-    })
-  }
+    });
+  };
 
-  const filterPosts = (posts: Post[]) => {
+  const filterPosts = (posts: TPost[]) => {
     let filteredPosts = posts;
     if (filter.author) {
-      filteredPosts = filteredPosts.filter((post: Post) => post.id_user === Number(filter.author));
+      filteredPosts = filteredPosts.filter((post: TPost) => post.id_user === +filter.author);
     }
     if (filter.category) {
-      filteredPosts = filteredPosts.filter((post: Post) => post.id_category === Number(filter.category));
+      filteredPosts = filteredPosts.filter((post: TPost) => post.id_category === +filter.category);
     }
     return filteredPosts;
-  }
+  };
 
   const deletePost = async (id: number) => {
     try {
-      const headers = { headers: { authorization: `Bearer ${token}` } }
+      const headers = { headers: { authorization: `Bearer ${token}` } };
       await request.deletePost(id, headers);
 
       const updatedPosts = await request.getPosts(headers);
@@ -51,65 +51,63 @@ function PostList() {
       toast.success('Post deleted');
     } catch (error: any) {
       if (error?.response?.data?.status === 401) {
-          push('/login');
-        }
+        push('/login');
+      }
       toast.error(error?.response?.data?.message || 'Internal error');
     }
-  }
-
-  if (error) return <p>{ error }</p>
+  };
 
   return (
     <section>
-      <h1>Posts</h1>
-      <section>
-        <label htmlFor='category'>Category</label>
+      <label htmlFor="category">
+        Category
         <select
-          name='category'
+          name="category"
           onChange={handleFilterChange}
         >
-          <option value=''>All</option>
+          <option value="">All</option>
           {
-            categories.map((category: Category) => (
-              <option
-                key={category.id}
-                value={category.id}
-              >
-                {category.name}
-              </option>
-            ))
-          }
+          categories.map((category: TCategory) => (
+            <option
+              key={category.id}
+              value={category.id}
+            >
+              {category.name}
+            </option>
+          ))
+        }
         </select>
-
-        <label htmlFor='author'>Author</label>
+      </label>
+      <label htmlFor="author">
+        Author
         <select
-          name='author'
+          name="author"
           onChange={handleFilterChange}
         >
-          <option value=''>All</option>
+          <option value="">All</option>
           {
-            users
-              .map((user: User) => (
+          users
+            .map((user: TUser) => (
               <option
                 key={user.email}
                 value={user.id}
               >
-                Dev {user.id}
+                Dev
+                {' '}
+                {user.id}
               </option>
             ))
-          }
-        </select>
-      </section>
-      <section>
-        {
-          filterPosts(posts).map((post: Post) => (
-            <Post key={post.id} post={post} deletePost={deletePost} />
-          ))
         }
-      </section>  
-      <ToastContainer />    
+        </select>
+      </label>
+      {
+        filterPosts(posts).map((post: TPost) => (
+          <Post key={post.id} post={post} deletePost={deletePost} />
+        ))
+      }
+      <ToastContainer />
     </section>
-  )
+  );
 }
 
 export default PostList;

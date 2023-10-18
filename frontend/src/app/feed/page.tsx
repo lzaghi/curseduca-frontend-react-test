@@ -1,15 +1,14 @@
-'use client'
+'use client';
 
-import Editor from "@/components/Editor"
-import Posts from "@/components/PostList"
-import { useAppSelector } from '@/redux/store';
-import request from "@/services/request";
 import { useRouter, redirect } from 'next/navigation';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/redux/store';
-import { setCategoriesAction, setPostsAction, setUsersAction } from '@/redux/slices/feedSlice';
 import { ToastContainer, toast } from 'react-toastify';
+import Editor from '../../components/Editor';
+import PostList from '../../components/PostList';
+import { useAppSelector, AppDispatch } from '../../redux/store';
+import request from '../../services/request';
+import { setCategoriesAction, setPostsAction, setUsersAction } from '../../redux/slices/feedSlice';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Feed() {
@@ -25,7 +24,7 @@ function Feed() {
     const fetchFeed = async () => {
       setLoading(true);
       try {
-        const headers = { headers: { authorization: `Bearer ${token}` } }
+        const headers = { headers: { authorization: `Bearer ${token}` } };
         const posts = await request.getPosts(headers);
         const categories = await request.getCategories(headers);
         const users = await request.getUsers(headers);
@@ -41,23 +40,23 @@ function Feed() {
       } finally {
         setLoading(false);
       }
-    }
+    };
     fetchFeed();
-  }, [token, dispatch, push])
-  
+  }, [token, dispatch, push]);
+
   return (
     <main>
       {
         loading ? <p>Loading...</p> : (
           <>
             <Editor />
-            <Posts />
+            <PostList />
           </>
         )
       }
       <ToastContainer />
     </main>
-  )
+  );
 }
 
-export default Feed
+export default Feed;

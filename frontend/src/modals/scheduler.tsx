@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
-import { dateFormatter } from '@/helpers/dateHandler';
+import { dateFormatter } from '../helpers/dateHandler';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
+import { TValue } from '../types/types';
 
 const customStyles = {
   content: {
@@ -14,13 +14,13 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    height: '500px'
+    height: '500px',
   },
 };
 
 function SchedulerModal({ resetEditor, disabled }: { resetEditor: () => void, disabled: boolean }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [dateTimeValue, onChange] = useState<Value>(new Date());
+  const [dateTimeValue, onChange] = useState<TValue>(new Date());
   const [scheduled, setScheduled] = useState('');
 
   const openModal = () => {
@@ -32,19 +32,19 @@ function SchedulerModal({ resetEditor, disabled }: { resetEditor: () => void, di
     setScheduled('');
   };
 
-  const scheduleDateTime = (datetime: Value) => {
+  const scheduleDateTime = (datetime: TValue) => {
     setScheduled(dateFormatter(datetime as Date));
     resetEditor();
-  }
+  };
 
   return (
     <div>
-      <button onClick={openModal} disabled={ disabled }>Schedule post</button>
+      <button type="button" onClick={openModal} disabled={disabled}>Schedule post</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
-        style={ customStyles }
+        style={customStyles}
       >
         <h2>Schedule your post!</h2>
         <p>When do you want your post to be published?</p>
@@ -53,15 +53,19 @@ function SchedulerModal({ resetEditor, disabled }: { resetEditor: () => void, di
           value={dateTimeValue}
           minDate={new Date()}
           clearIcon={null}
-          disableClock={true}
+          disableClock
         />
-        <button onClick={() => scheduleDateTime(dateTimeValue)}>
+        <button type="button" onClick={() => scheduleDateTime(dateTimeValue)}>
           Schedule
         </button>
-        <button onClick={closeModal}>Close</button>
+        <button type="button" onClick={closeModal}>Close</button>
         {
           scheduled && (
-            <p>post is scheduled: {scheduled}</p>
+            <p>
+              post is scheduled:
+              {' '}
+              {scheduled}
+            </p>
           )
         }
       </Modal>
