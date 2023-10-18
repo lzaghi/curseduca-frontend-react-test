@@ -10,11 +10,11 @@ import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import request from '../services/request';
 import { useAppSelector, AppDispatch } from '../redux/store';
-import { setPostsAction } from '../redux/slices/feedSlice';
 import { dateFormatter } from '../helpers/dateHandler';
 import SchedulerModal from '../modals/scheduler';
 import 'react-toastify/dist/ReactToastify.css';
 import { TCategory } from '../types/types';
+import { fetchPosts } from '../services/fetch';
 
 function EditorComponent() {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -47,8 +47,7 @@ function EditorComponent() {
     try {
       await request.createPost(body, headers);
       resetEditor();
-      const posts = await request.getPosts(headers);
-      dispatch(setPostsAction(posts.data.reverse()));
+      fetchPosts(dispatch, token);
       toast.success('Post published successfully!');
     } catch (error: any) {
       if (error?.response?.data?.status === 401) {
@@ -68,10 +67,10 @@ function EditorComponent() {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
+        placeholder="Título"
       />
       <label htmlFor="category">
-        Category
+        Categoria
         <select
           name="category"
           onChange={(e) => setCategory(e.target.value)}
@@ -100,7 +99,7 @@ function EditorComponent() {
         onClick={publishPost}
         disabled={disabled}
       >
-        Publish
+        Publicar
       </button>
       <ToastContainer />
     </section>

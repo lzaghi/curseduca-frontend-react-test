@@ -7,9 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import Editor from '../../components/Editor';
 import PostList from '../../components/PostList';
 import { useAppSelector, AppDispatch } from '../../redux/store';
-import request from '../../services/request';
-import { setCategoriesAction, setPostsAction, setUsersAction } from '../../redux/slices/feedSlice';
 import 'react-toastify/dist/ReactToastify.css';
+import { fetchFeed } from '../../services/fetch';
 
 function Feed() {
   const [loading, setLoading] = useState(false);
@@ -21,16 +20,10 @@ function Feed() {
   const { push } = useRouter();
 
   useEffect(() => {
-    const fetchFeed = async () => {
+    const fetchData = async () => {
       setLoading(true);
       try {
-        const headers = { headers: { authorization: `Bearer ${token}` } };
-        const posts = await request.getPosts(headers);
-        const categories = await request.getCategories(headers);
-        const users = await request.getUsers(headers);
-        dispatch(setPostsAction(posts.data.reverse()));
-        dispatch(setCategoriesAction(categories.data));
-        dispatch(setUsersAction(Object.values(users.data)));
+        fetchFeed(dispatch, token);
       } catch (error: any) {
         setLoading(false);
         if (error?.response?.data?.status === 401) {
@@ -41,7 +34,7 @@ function Feed() {
         setLoading(false);
       }
     };
-    fetchFeed();
+    fetchData();
   }, [token, dispatch, push]);
 
   return (

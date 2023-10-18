@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
-import { setPostsAction } from '../redux/slices/feedSlice';
 import { AppDispatch, useAppSelector } from '../redux/store';
 import request from '../services/request';
 import Post from './Post';
 import 'react-toastify/dist/ReactToastify.css';
 import { TPost, TCategory, TUser } from '../types/types';
+import { fetchPosts } from '../services/fetch';
 
 function PostList() {
   const [filter, setFilter] = useState({
@@ -45,9 +45,7 @@ function PostList() {
     try {
       const headers = { headers: { authorization: `Bearer ${token}` } };
       await request.deletePost(id, headers);
-
-      const updatedPosts = await request.getPosts(headers);
-      dispatch(setPostsAction(updatedPosts.data.reverse()));
+      fetchPosts(dispatch, token);
       toast.success('Post deleted');
     } catch (error: any) {
       if (error?.response?.data?.status === 401) {
@@ -60,12 +58,12 @@ function PostList() {
   return (
     <section>
       <label htmlFor="category">
-        Category
+        Categoria
         <select
           name="category"
           onChange={handleFilterChange}
         >
-          <option value="">All</option>
+          <option value="">Todas</option>
           {
           categories.map((category: TCategory) => (
             <option
@@ -79,12 +77,12 @@ function PostList() {
         </select>
       </label>
       <label htmlFor="author">
-        Author
+        Autor
         <select
           name="author"
           onChange={handleFilterChange}
         >
-          <option value="">All</option>
+          <option value="">Todos</option>
           {
           users
             .map((user: TUser) => (
@@ -93,8 +91,7 @@ function PostList() {
                 value={user.id}
               >
                 Dev
-                {' '}
-                {user.id}
+                {` ${user.id}`}
               </option>
             ))
         }

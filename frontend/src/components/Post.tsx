@@ -14,14 +14,14 @@ function Post({ post, deletePost }: { post: TPost, deletePost: (id: number) => v
       <p>
         Dev
         {' '}
-        {post.id_user}
+        {` ${post.id_user}`}
       </p>
       <p>{categories.find((category: {id: number}) => category.id === post.id_category)?.name}</p>
       <p dangerouslySetInnerHTML={{ __html: post.text }} />
       <p>{customDate(post.date)}</p>
       {
           users.find((user) => user.email === email)?.id === post.id_user && (
-            <DeleteModal postId={post.id} deletePost={deletePost} />
+            <DeleteModal post={post} deletePost={deletePost} />
           )
         }
     </article>

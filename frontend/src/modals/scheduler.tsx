@@ -39,15 +39,15 @@ function SchedulerModal({ resetEditor, disabled }: { resetEditor: () => void, di
 
   return (
     <div>
-      <button type="button" onClick={openModal} disabled={disabled}>Schedule post</button>
+      <button type="button" onClick={openModal} disabled={disabled}>*reloginho*</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
         style={customStyles}
       >
-        <h2>Schedule your post!</h2>
-        <p>When do you want your post to be published?</p>
+        <h2>Agende sua publicação!</h2>
+        <p>Quando você quer que seu post seja publicado?</p>
         <DateTimePicker
           onChange={onChange}
           value={dateTimeValue}
@@ -56,13 +56,13 @@ function SchedulerModal({ resetEditor, disabled }: { resetEditor: () => void, di
           disableClock
         />
         <button type="button" onClick={() => scheduleDateTime(dateTimeValue)}>
-          Schedule
+          Agendar
         </button>
-        <button type="button" onClick={closeModal}>Close</button>
+        <button type="button" onClick={closeModal}>X</button>
         {
           scheduled && (
             <p>
-              post is scheduled:
+              publicação agendada para:
               {' '}
               {scheduled}
             </p>
