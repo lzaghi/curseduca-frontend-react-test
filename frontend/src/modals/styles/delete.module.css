@@ -1,0 +1,54 @@
+.deleteButton {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.modal {
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  height: 500px;
+}
+
+.warning {
+  margin-top: 20px;
+}
+
+.buttons {
+  display: flex;
+  margin: 20px 0 10px;
+}
+
+.cancelButton,
+.confirmButton {
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  height: 35px;
+  transition: ease 0.2s;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.cancelButton:hover,
+.confirmButton:hover {
+  opacity: 1;
+}
+
+.cancelButton {
+  background-color: var(--main-blue);
+  width: 85px;
+}
+
+.confirmButton {
+  background-color: red;
+  margin-left: 20px;
+  text-transform: uppercase;
+  width: 100px;
+}

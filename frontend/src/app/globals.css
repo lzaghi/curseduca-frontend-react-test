@@ -1,0 +1,22 @@
+:root {
+  --main-blue: #124b76;
+  --light-blue: #a4d1f3;
+  --yellow: #e39b0e
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}

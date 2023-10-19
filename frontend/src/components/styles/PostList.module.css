@@ -1,0 +1,70 @@
+.filtersContainer {
+  background-color: white;
+  padding: 10px 0;
+  margin-top: 20px;
+}
+
+.filtersWrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: calc(100vw - 40px);
+  max-width: 350px;
+  transition: ease 0.2s;
+}
+
+.header {
+  color: var(--main-blue);
+  margin-bottom: 10px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter {
+  margin-bottom: 10px;
+}
+
+.select {
+  background-color: white;
+  border: none;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  border-radius: 20px;
+  height: 25px;
+  padding-inline: 5px;
+}
+
+.select:focus {
+  border-top: 1px solid var(--yellow);
+  border-bottom: 1px solid var(--yellow);
+  outline: none;
+}
+
+.noPosts {
+  margin: 20px auto 0;
+  color: white;
+  width: calc(100vw - 40px);
+  max-width: 350px;
+}
+
+@media screen and ( min-width : 800px ) {
+
+  .filtersWrapper {
+    max-width: 750px;
+  }
+
+  .filters {
+    flex-direction: row;
+  }
+
+  .filter {
+    margin-right: 20px;
+  }
+
+  .noPosts {
+    max-width: 750px;
+  }
+}

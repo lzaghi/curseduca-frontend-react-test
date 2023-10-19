@@ -1,0 +1,51 @@
+.scheduleButton {
+  background-color: white;
+  border: none;
+}
+
+.scheduleButton:enabled {
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.question {
+  margin: 20px 0;
+}
+
+.cancelButton,
+.confirmButton {
+  background-color: var(--main-blue);
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: ease 0.2s;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.cancelButton {
+  min-width: 20px;
+  height: 20px;
+  border-radius: 100%;
+}
+
+.confirmButton {
+  border-radius: 20px;
+  height: 30px;
+  margin-left: 10px;
+  width: 80px;
+}
+
+.cancelButton:hover,
+.confirmButton:hover {
+  opacity: 1;
+}
+
+.confirmation {
+  margin-top: 20px;
+}

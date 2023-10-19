@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb"
+  ],
+  "rules": {
+    // permite escrever jsx em arquivos .ts
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+    "import/extensions": ["error", "ignorePackages", {
+      "ts": "never",
+      "tsx": "never"
+    }],
+    "no-shadow": "off",
+    "no-unused-vars": "off"
+  }
+}

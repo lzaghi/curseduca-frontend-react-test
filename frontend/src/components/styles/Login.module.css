@@ -1,0 +1,88 @@
+.background {
+  align-items: center;
+  background-image: radial-gradient( var(--light-blue), var(--main-blue)); 
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.loginCard {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 0 26px 0 rgba(68, 73, 85, 0.2);
+  height: fit-content;
+  margin-inline: auto;
+  padding: 40px;
+  position: relative;
+  transition: ease 0.3s;
+  width: 300px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: block;
+  height: fit-content;
+  margin: 0 auto 60px;
+  width: 220px;
+}
+
+.loginInput, .loginButton {
+  border-radius: 5px;
+  font-size: 0.9rem;
+  height: 35px;
+  margin-bottom: 10px;
+}
+
+.loginInput {
+  border: 2px solid lightgray;
+  padding: 5px;
+  transition: ease 0.2s;
+}
+
+.loginInput:focus {
+  border: 2px solid gray;
+  outline: none;
+}
+
+.loginButton {
+  background: var(--main-blue);
+  border: none;
+  color: white;
+  font-weight: 700;
+  margin-top: 10px;
+  transition: ease 0.4s;
+}
+
+.loginButton:disabled {
+  opacity: 0.5;
+}
+
+.loginButton:enabled {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.loginButton:enabled:hover {
+  opacity: 1;
+}
+
+.loginLoader {
+  bottom: -500px;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@media screen and ( min-width : 800px ) {
+
+  .loginCard {
+    width: 450px;
+  }
+}

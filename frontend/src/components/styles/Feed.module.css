@@ -1,0 +1,17 @@
+.background {
+  align-content: center;
+  background-color: var(--main-blue);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: scroll;
+  overflow-x: hidden;
+  padding-bottom: 30px;
+}
+
+.feedLoader {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

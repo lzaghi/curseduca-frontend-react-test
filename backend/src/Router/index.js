@@ -29,7 +29,7 @@ export default class Router {
                 return;
             }
 
-            if (this.auth.isAuthenticated({ email, password }) === false) {
+            if (this.auth.isAuthenticated({ email, password }) === undefined) {
                 const status = 401
                 const message = 'Incorrect email or password'
                 res.status(status).json({ status, message })
