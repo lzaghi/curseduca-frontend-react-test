@@ -1,6 +1,9 @@
-import React, { use, useState } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
+import Image from 'next/image';
 import { TPost } from '../types/types';
+import trash from '../assets/trash.svg';
+import styles from './styles/delete.module.css';
 
 const customStyles = {
   content: {
@@ -27,7 +30,9 @@ function DeleteModal({ post, deletePost }: { post: TPost, deletePost: (id: numbe
 
   return (
     <div>
-      <button type="button" onClick={openModal}>*lixeirinha*</button>
+      <button type="button" onClick={openModal} className={styles.deleteButton}>
+        <Image src={trash} alt="delete icon" />
+      </button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

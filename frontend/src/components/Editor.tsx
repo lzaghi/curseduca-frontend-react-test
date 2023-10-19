@@ -15,6 +15,7 @@ import SchedulerModal from '../modals/scheduler';
 import 'react-toastify/dist/ReactToastify.css';
 import { TCategory } from '../types/types';
 import { setPostsAction } from '../redux/slices/feedSlice';
+import styles from './styles/Editor.module.css';
 
 const Editor = dynamic(
   () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
@@ -68,7 +69,7 @@ function EditorComponent() {
   }, [title, editorState]);
 
   return (
-    <section>
+    <section className={styles.editorWrapper}>
       <input
         type="text"
         value={title}

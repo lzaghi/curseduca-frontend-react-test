@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
+import Image from 'next/image';
 import { dateFormatter } from '../helpers/dateHandler';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import { TValue } from '../types/types';
+import watch from '../assets/watch.svg';
 
 const customStyles = {
   content: {
@@ -14,7 +16,7 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    height: '500px',
+    height: '300px',
   },
 };
 
@@ -39,7 +41,9 @@ function SchedulerModal({ resetEditor, disabled }: { resetEditor: () => void, di
 
   return (
     <div>
-      <button type="button" onClick={openModal} disabled={disabled}>*reloginho*</button>
+      <button type="button" onClick={openModal} disabled={disabled}>
+        <Image src={watch} alt="watch icon" />
+      </button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

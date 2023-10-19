@@ -10,9 +10,10 @@ import { useAppSelector, AppDispatch } from '../redux/store';
 import 'react-toastify/dist/ReactToastify.css';
 import request from '../services/request';
 import { setCategoriesAction, setPostsAction, setUsersAction } from '../redux/slices/feedSlice';
+import styles from './styles/Feed.module.css';
 
 function Feed() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const { token } = useAppSelector((state) => state.authReducer.value);
   if (!token) redirect('/login');
@@ -22,7 +23,6 @@ function Feed() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       try {
         const headers = { headers: { authorization: `Bearer ${token}` } };
         const posts = await request.getPosts(headers);
@@ -45,7 +45,7 @@ function Feed() {
   }, [token, dispatch, push]);
 
   return (
-    <main>
+    <main className={styles.background}>
       {
         loading ? <p>Loading...</p> : (
           <>

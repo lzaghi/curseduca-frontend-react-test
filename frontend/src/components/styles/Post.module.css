@@ -1,0 +1,60 @@
+.postCard {
+  background-color: white;
+  border-radius: 20px;
+  margin-top: 40px;
+  padding: 10px;
+}
+
+.profile {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.profilePic {
+  text-align: center;
+  background-color: white;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  width: 70px;
+  position: absolute;
+  top: -35px;
+  left: -10px;
+}
+
+.user {
+  margin-left: 60px;
+  padding-top: 6px;
+}
+
+.categoryDate {
+  display: flex;
+  border-top: 2px solid var(--yellow);
+  font-size: 0.8rem;
+  justify-content: space-between;
+  margin: 6px 0 15px;
+  padding-top: 8px;
+}
+
+.category {
+  background-color: var(--yellow);
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  height: 15px;
+  padding: 0 15px;
+}
+
+.icons {
+  border-top: 1px solid var(--yellow);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-top: 8px;
+}
+
+.commentIcon {
+  margin-left: 10px;
+}
