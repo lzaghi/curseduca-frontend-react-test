@@ -1,14 +1,18 @@
 .editorContainer {
   background-color: white;
   padding: 30px 0;
-  /* width: 100vw; */
-  /* margin: 0 calc(-50vw + (175px)) 0; */
 }
 
 .editorWrapper {
   margin: 0 auto;
   width: calc(100vw - 40px);
   max-width: 350px;
+  position: relative;
+  transition: ease 0.2;
+}
+
+.logo {
+  display: none;
 }
 
 .header {
@@ -31,10 +35,13 @@
   padding-inline: 5px;
 }
 
+.categorySelect option {
+  border-radius: 20px;
+}
+
 .titleInput {
   border: none;
   border-bottom: 1px solid gray;
-  border-top: 1px solid gray;
   border-radius: 20px;
   font-size: 0.9rem;
   height: 30px;
@@ -44,13 +51,15 @@
 
 .titleInput:focus,
 .categorySelect:focus {
-  border-top: 1px solid var(--yellow);
   border-bottom: 1px solid var(--yellow);
   outline: none;
 }
 
+.categorySelect:focus {
+  border-top: 1px solid var(--yellow);
+}
+
 .draftWrapper {
-  border-top: 1px solid gray;
   border-radius: 20px;
   margin-top: 10px;
 }
@@ -60,7 +69,6 @@
   border-bottom: 1px solid gray;
   border-radius: 20px;
   padding: 0 10px;
-  z-index: -1;
 }
 
 .draftToolbar {
@@ -102,4 +110,23 @@
 
 .publishButton:enabled:hover {
   opacity: 1;
+}
+
+@media screen and ( min-width : 800px ) {
+
+  .editorWrapper {
+    max-width: 750px;
+  }
+
+  .logo {
+    display: block;
+    width: 150px;
+    height: fit-content;
+    position: absolute;
+    right: 0;
+  }
+
+  .titleInput {
+    max-width: 316px;
+  }
 }

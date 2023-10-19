@@ -5,6 +5,7 @@
   padding: 10px;
   width: calc(100vw - 40px);
   max-width: 350px;
+  transition: ease 0.2s;
 }
 
 .profile {
@@ -63,4 +64,11 @@
 
 .commentIcon {
   margin-left: 10px;
+}
+
+@media screen and ( min-width : 800px ) {
+
+  .postCard {
+    max-width: 750px;
+  }
 }

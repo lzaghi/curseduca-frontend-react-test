@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import request from '../services/request';
 import { useAppSelector, AppDispatch } from '../redux/store';
 import { dateFormatter } from '../helpers/dateHandler';
@@ -16,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { TCategory } from '../types/types';
 import { setPostsAction } from '../redux/slices/feedSlice';
 import styles from './styles/Editor.module.css';
+import logo from '../assets/logo.png';
 
 const Editor = dynamic(
   () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
@@ -73,6 +75,7 @@ function EditorComponent() {
   return (
     <section className={styles.editorContainer}>
       <div className={styles.editorWrapper}>
+        <Image src={logo} alt="logo Curseduca Social Media" className={styles.logo} />
         <h1 className={styles.header}>Faça uma publicação!</h1>
         <div className={styles.postInfo}>
           <label htmlFor="category">

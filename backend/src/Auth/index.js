@@ -24,7 +24,6 @@ class Auth {
     }
 
     isAuthenticated({ email, password }) {
-        console.log('auth chamado', email, password)
         return this.data.find(user => user.email === email && user.password === password)
     }
 

@@ -64,49 +64,50 @@ function PostList() {
       <div className={styles.filtersContainer}>
         <div className={styles.filtersWrapper}>
           <h3 className={styles.header}>Filtros de busca</h3>
-          <label htmlFor="category" className={styles.filter}>
-            Categoria: &nbsp;
-            <select
-              name="category"
-              onChange={handleFilterChange}
-              className={styles.select}
-            >
-              <option value="">Todas</option>
-              {
-              categories.map((category: TCategory) => (
-                <option
-                  key={category.id}
-                  value={category.id}
-                >
-                  {category.name}
-                </option>
-              ))
-            }
-            </select>
-          </label>
-          <label htmlFor="author" className={styles.filter}>
-            Autor: &nbsp;
-            <select
-              name="author"
-              onChange={handleFilterChange}
-              className={styles.select}
-            >
-              <option value="">Todos</option>
-              {
-              users
-                .map((user: TUser) => (
+          <div className={styles.filters}>
+            <label htmlFor="category" className={styles.filter}>
+              Categoria: &nbsp;
+              <select
+                name="category"
+                onChange={handleFilterChange}
+                className={styles.select}
+              >
+                <option value="">Todas</option>
+                {
+                categories.map((category: TCategory) => (
                   <option
-                    key={user.email}
-                    value={user.id}
+                    key={category.id}
+                    value={category.id}
                   >
-                    Dev
-                    {` ${user.id}`}
+                    {category.name}
                   </option>
                 ))
-            }
-            </select>
-          </label>
-
+              }
+              </select>
+            </label>
+            <label htmlFor="author" className={styles.filter}>
+              Autor: &nbsp;
+              <select
+                name="author"
+                onChange={handleFilterChange}
+                className={styles.select}
+              >
+                <option value="">Todos</option>
+                {
+                users
+                  .map((user: TUser) => (
+                    <option
+                      key={user.email}
+                      value={user.id}
+                    >
+                      Dev
+                      {` ${user.id}`}
+                    </option>
+                  ))
+              }
+              </select>
+            </label>
+          </div>
         </div>
       </div>
       {

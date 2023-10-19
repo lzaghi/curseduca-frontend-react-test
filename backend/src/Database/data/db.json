@@ -15,6 +15,78 @@
       "id_category": 3,
       "id_user": 1,
       "date": "2020-10-01 08:30:00"
+    },
+    {
+      "title": "aaaaa",
+      "text": "<p>aaaaaaa</p>\n",
+      "id_user": 1,
+      "id_category": 1,
+      "date": "2023-10-17 23:00:28",
+      "id": 3
+    },
+    {
+      "title": "asdasdas",
+      "text": "<p>dasdasdasd</p>\n",
+      "id_user": 1,
+      "id_category": 1,
+      "date": "2023-10-18 21:15:48",
+      "id": 4
+    },
+    {
+      "title": "gggggg",
+      "text": "<p>gggggg</p>\n",
+      "id_user": 1,
+      "id_category": 1,
+      "date": "2023-10-18 21:56:43",
+      "id": 5
+    },
+    {
+      "title": "teste",
+      "text": "<p>testeteeee</p>\n",
+      "id_user": 1,
+      "id_category": 1,
+      "date": "2023-10-18 22:15:18",
+      "id": 6
+    },
+    {
+      "title": "Teste com um titulo bemmmmmmm grande",
+      "text": "<p>asdasdasdasd</p>\n",
+      "id_user": 1,
+      "id_category": 1,
+      "date": "2023-10-18 22:25:27",
+      "id": 7
+    },
+    {
+      "title": "foi",
+      "text": "<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa😍</p>\n",
+      "id_user": 1,
+      "id_category": 1,
+      "date": "2023-10-19 11:29:11",
+      "id": 9
+    },
+    {
+      "title": "asd",
+      "text": "<p>e com palavras separadas <span style=\"color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: medium;font-family: __Montserrat_cce811, __Montserrat_Fallback_cce811;\">e com palavras separadas e com palavras separadas e com palavras separadas e com palavras separadas e com palavras separadas e com palavras separadas </span></p>\n",
+      "id_user": 1,
+      "id_category": 1,
+      "date": "2023-10-19 11:39:25",
+      "id": 10
+    },
+    {
+      "title": "Testando com npm start",
+      "text": "<p>aloooo agora vai</p>\n<p>bora q ja rolou 😋</p>\n",
+      "id_user": 1,
+      "id_category": 1,
+      "date": "2023-10-19 14:46:39",
+      "id": 11
+    },
+    {
+      "title": "asdasd",
+      "text": "<p>as<em>dasd</em></p>\n",
+      "id_user": 1,
+      "id_category": 1,
+      "date": "2023-10-19 15:33:08",
+      "id": 12
     }
   ],
   "categories": [

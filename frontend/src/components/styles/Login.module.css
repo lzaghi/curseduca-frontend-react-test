@@ -24,8 +24,9 @@
 }
 
 .logo {
+  display: block;
   height: fit-content;
-  margin-bottom: 60px;
+  margin: 0 auto 60px;
   width: 220px;
 }
 
@@ -77,4 +78,11 @@
   position: absolute;
   right: 0;
   top: 0;
+}
+
+@media screen and ( min-width : 800px ) {
+
+  .loginCard {
+    width: 450px;
+  }
 }

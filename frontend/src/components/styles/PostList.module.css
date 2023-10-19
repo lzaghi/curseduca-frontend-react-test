@@ -10,11 +10,17 @@
   margin: 0 auto;
   width: calc(100vw - 40px);
   max-width: 350px;
+  transition: ease 0.2s;
 }
 
 .header {
   color: var(--main-blue);
   margin-bottom: 10px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
 }
 
 .filter {
@@ -42,4 +48,23 @@
   color: white;
   width: calc(100vw - 40px);
   max-width: 350px;
+}
+
+@media screen and ( min-width : 800px ) {
+
+  .filtersWrapper {
+    max-width: 750px;
+  }
+
+  .filters {
+    flex-direction: row;
+  }
+
+  .filter {
+    margin-right: 20px;
+  }
+
+  .noPosts {
+    max-width: 750px;
+  }
 }
