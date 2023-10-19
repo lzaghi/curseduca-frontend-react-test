@@ -15,8 +15,8 @@ import Loading from './Loading';
 
 function Login() {
   const [user, setUser] = useState({
-    email: 'dev1@curseduca.com',
-    password: 'dev1',
+    email: '',
+    password: '',
   });
   const [disabled, setDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
