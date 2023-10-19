@@ -10,6 +10,7 @@ import Post from './Post';
 import 'react-toastify/dist/ReactToastify.css';
 import { TPost, TCategory, TUser } from '../types/types';
 import { setPostsAction } from '../redux/slices/feedSlice';
+import styles from './styles/PostList.module.css';
 
 function PostList() {
   const [filter, setFilter] = useState({
@@ -47,7 +48,9 @@ function PostList() {
       await request.deletePost(id, headers);
       const { data } = await request.getPosts(headers);
       dispatch(setPostsAction(data.reverse()));
-      toast.success('Post deletado');
+      toast.success('Post deletado', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
     } catch (error: any) {
       if (error?.response?.data?.status === 401) {
         push('/login');
@@ -58,50 +61,62 @@ function PostList() {
 
   return (
     <section>
-      <label htmlFor="category">
-        Categoria
-        <select
-          name="category"
-          onChange={handleFilterChange}
-        >
-          <option value="">Todas</option>
-          {
-          categories.map((category: TCategory) => (
-            <option
-              key={category.id}
-              value={category.id}
+      <div className={styles.filtersContainer}>
+        <div className={styles.filtersWrapper}>
+          <h3 className={styles.header}>Filtros de busca</h3>
+          <label htmlFor="category" className={styles.filter}>
+            Categoria: &nbsp;
+            <select
+              name="category"
+              onChange={handleFilterChange}
+              className={styles.select}
             >
-              {category.name}
-            </option>
-          ))
-        }
-        </select>
-      </label>
-      <label htmlFor="author">
-        Autor
-        <select
-          name="author"
-          onChange={handleFilterChange}
-        >
-          <option value="">Todos</option>
-          {
-          users
-            .map((user: TUser) => (
-              <option
-                key={user.email}
-                value={user.id}
-              >
-                Dev
-                {` ${user.id}`}
-              </option>
-            ))
-        }
-        </select>
-      </label>
+              <option value="">Todas</option>
+              {
+              categories.map((category: TCategory) => (
+                <option
+                  key={category.id}
+                  value={category.id}
+                >
+                  {category.name}
+                </option>
+              ))
+            }
+            </select>
+          </label>
+          <label htmlFor="author" className={styles.filter}>
+            Autor: &nbsp;
+            <select
+              name="author"
+              onChange={handleFilterChange}
+              className={styles.select}
+            >
+              <option value="">Todos</option>
+              {
+              users
+                .map((user: TUser) => (
+                  <option
+                    key={user.email}
+                    value={user.id}
+                  >
+                    Dev
+                    {` ${user.id}`}
+                  </option>
+                ))
+            }
+            </select>
+          </label>
+
+        </div>
+      </div>
       {
-        filterPosts(posts).map((post: TPost) => (
-          <Post key={post.id} post={post} deletePost={deletePost} />
-        ))
+        !filterPosts(posts).length ? (
+          <p className={styles.noPosts}>Nenhuma publicação encontrada...</p>
+        ) : (
+          filterPosts(posts).map((post: TPost) => (
+            <Post key={post.id} post={post} deletePost={deletePost} />
+          ))
+        )
       }
       <ToastContainer />
     </section>

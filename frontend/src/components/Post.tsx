@@ -41,7 +41,7 @@ function Post({ post, deletePost }: { post: TPost, deletePost: (id: number) => v
         </p>
         <p className={styles.date}>{customDate(post.date)}</p>
       </div>
-      <div ref={textRef} />
+      <div ref={textRef} className={styles.postText} />
       <div className={styles.icons}>
         <div className={styles.fakeIcons}>
           <Image src={heart} alt="heart icon" />

@@ -1,0 +1,105 @@
+.editorContainer {
+  background-color: white;
+  padding: 30px 0;
+  /* width: 100vw; */
+  /* margin: 0 calc(-50vw + (175px)) 0; */
+}
+
+.editorWrapper {
+  margin: 0 auto;
+  width: calc(100vw - 40px);
+  max-width: 350px;
+}
+
+.header {
+  color: var(--main-blue);
+  margin-bottom: 40px;
+}
+
+.postInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.categorySelect {
+  background-color: white;
+  border: none;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  border-radius: 20px;
+  height: 25px;
+  padding-inline: 5px;
+}
+
+.titleInput {
+  border: none;
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  height: 30px;
+  margin-top: 10px;
+  padding-inline: 10px;
+}
+
+.titleInput:focus,
+.categorySelect:focus {
+  border-top: 1px solid var(--yellow);
+  border-bottom: 1px solid var(--yellow);
+  outline: none;
+}
+
+.draftWrapper {
+  border-top: 1px solid gray;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.draftEditor {
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  border-radius: 20px;
+  padding: 0 10px;
+  z-index: -1;
+}
+
+.draftToolbar {
+  border: none;
+  border-bottom: 1px solid gray;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 20px 0;
+}
+
+.publishOptions {
+  align-items: end;
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+}
+
+.publishButton {
+  background-color: var(--main-blue);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  height: 35px;
+  margin-left: 10px;
+  width: 100px;
+  transition: ease 0.2s;
+}
+
+.publishButton:disabled {
+  opacity: 0.5;
+}
+
+.publishButton:enabled {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.publishButton:enabled:hover {
+  opacity: 1;
+}

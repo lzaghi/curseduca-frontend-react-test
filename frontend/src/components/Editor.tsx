@@ -55,7 +55,9 @@ function EditorComponent() {
       resetEditor();
       const { data } = await request.getPosts(headers);
       dispatch(setPostsAction(data.reverse()));
-      toast.success('Publicado com sucesso!');
+      toast.success('Publicado com sucesso!', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
     } catch (error: any) {
       if (error?.response?.data?.status === 401) {
         push('/login');
@@ -69,45 +71,56 @@ function EditorComponent() {
   }, [title, editorState]);
 
   return (
-    <section className={styles.editorWrapper}>
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Título"
-      />
-      <label htmlFor="category">
-        Categoria
-        <select
-          name="category"
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          {
-          categories.map((category: TCategory) => (
-            <option
-              key={category.id}
-              value={category.id}
+    <section className={styles.editorContainer}>
+      <div className={styles.editorWrapper}>
+        <h1 className={styles.header}>Faça uma publicação!</h1>
+        <div className={styles.postInfo}>
+          <label htmlFor="category">
+            Escolha uma categoria: &nbsp;
+            <select
+              name="category"
+              onChange={(e) => setCategory(e.target.value)}
+              className={styles.categorySelect}
             >
-              {category.name}
-            </option>
-          ))
-        }
-        </select>
-      </label>
-      <Editor
-        editorState={editorState}
-        wrapperClassName="demo-wrapper"
-        editorClassName="demo-editor"
-        onEditorStateChange={(editorState) => setEditorState(editorState)}
-      />
-      <SchedulerModal resetEditor={resetEditor} disabled={disabled} />
-      <button
-        type="button"
-        onClick={publishPost}
-        disabled={disabled}
-      >
-        Publicar
-      </button>
+              {
+              categories.map((category: TCategory) => (
+                <option
+                  key={category.id}
+                  value={category.id}
+                >
+                  {category.name}
+                </option>
+              ))
+            }
+            </select>
+          </label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Título"
+            className={styles.titleInput}
+          />
+        </div>
+        <Editor
+          editorState={editorState}
+          wrapperClassName={styles.draftWrapper}
+          editorClassName={styles.draftEditor}
+          toolbarClassName={styles.draftToolbar}
+          onEditorStateChange={(editorState) => setEditorState(editorState)}
+        />
+        <div className={styles.publishOptions}>
+          <SchedulerModal resetEditor={resetEditor} disabled={disabled} />
+          <button
+            className={styles.publishButton}
+            type="button"
+            onClick={publishPost}
+            disabled={disabled}
+          >
+            Publicar
+          </button>
+        </div>
+      </div>
       <ToastContainer />
     </section>
   );

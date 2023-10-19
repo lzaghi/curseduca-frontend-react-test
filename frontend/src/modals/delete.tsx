@@ -7,13 +7,15 @@ import styles from './styles/delete.module.css';
 
 const customStyles = {
   content: {
+    backgroundColor: '#f5f5f5',
     top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    height: '500px',
+    width: 'calc(100vw - 20px)',
+    maxWidth: '500px',
   },
 };
 
@@ -40,13 +42,19 @@ function DeleteModal({ post, deletePost }: { post: TPost, deletePost: (id: numbe
         style={customStyles}
       >
         <h2>Sua publicação será deletada!</h2>
-        <p>
-          Tem certeza de que deseja excluir o post
-          {` "${post.title}"`}
+        <p className={styles.warning}>
+          Tem certeza de que deseja excluir
+          {' '}
+          <em>permanentemente</em>
+          {' '}
+          o post
+          <b>{` "${post.title}"`}</b>
           ?
         </p>
-        <button type="button" onClick={closeModal}>Cancel</button>
-        <button type="button" onClick={() => deletePost(post.id)}>Deletar</button>
+        <div className={styles.buttons}>
+          <button className={styles.cancelButton} type="button" onClick={closeModal}>Cancelar</button>
+          <button className={styles.confirmButton} type="button" onClick={() => deletePost(post.id)}>Deletar</button>
+        </div>
       </Modal>
     </div>
   );

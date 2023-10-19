@@ -1,8 +1,10 @@
 .postCard {
   background-color: white;
   border-radius: 20px;
-  margin-top: 40px;
+  margin: 40px auto 0;
   padding: 10px;
+  width: calc(100vw - 40px);
+  max-width: 350px;
 }
 
 .profile {
@@ -45,6 +47,10 @@
   font-weight: bold;
   height: 15px;
   padding: 0 15px;
+}
+
+.postText p {
+  word-wrap: break-word;
 }
 
 .icons {

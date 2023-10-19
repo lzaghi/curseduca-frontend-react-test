@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import request from '../services/request';
 import { setCategoriesAction, setPostsAction, setUsersAction } from '../redux/slices/feedSlice';
 import styles from './styles/Feed.module.css';
+import Loading from './Loading';
 
 function Feed() {
   const [loading, setLoading] = useState(true);
@@ -47,7 +48,7 @@ function Feed() {
   return (
     <main className={styles.background}>
       {
-        loading ? <p>Loading...</p> : (
+        loading ? <div className={styles.feedLoader}><Loading /></div> : (
           <>
             <Editor />
             <PostList />

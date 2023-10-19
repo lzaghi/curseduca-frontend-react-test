@@ -7,26 +7,34 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import { TValue } from '../types/types';
 import watch from '../assets/watch.svg';
+import styles from './styles/scheduler.module.css';
 
 const customStyles = {
   content: {
-    top: '50%',
+    backgroundColor: '#f5f5f5',
+    top: '-220px',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    height: '300px',
+    transform: 'translate(-50%, 50%)',
+    height: '500px',
+    width: 'calc(100vw - 20px)',
+    maxWidth: '500px',
   },
 };
 
-function SchedulerModal({ resetEditor, disabled }: { resetEditor: () => void, disabled: boolean }) {
+function SchedulerModal({
+  resetEditor,
+  disabled,
+}: { resetEditor: () => void, disabled: boolean }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [dateTimeValue, onChange] = useState<TValue>(new Date());
   const [scheduled, setScheduled] = useState('');
 
   const openModal = () => {
     setModalIsOpen(true);
+    resetEditor();
   };
 
   const closeModal = () => {
@@ -36,12 +44,11 @@ function SchedulerModal({ resetEditor, disabled }: { resetEditor: () => void, di
 
   const scheduleDateTime = (datetime: TValue) => {
     setScheduled(dateFormatter(datetime as Date));
-    resetEditor();
   };
 
   return (
     <div>
-      <button type="button" onClick={openModal} disabled={disabled}>
+      <button type="button" onClick={openModal} disabled={disabled} className={styles.scheduleButton}>
         <Image src={watch} alt="watch icon" />
       </button>
       <Modal
@@ -50,8 +57,11 @@ function SchedulerModal({ resetEditor, disabled }: { resetEditor: () => void, di
         contentLabel="Example Modal"
         style={customStyles}
       >
-        <h2>Agende sua publicação!</h2>
-        <p>Quando você quer que seu post seja publicado?</p>
+        <div className={styles.header}>
+          <h2>Agende sua publicação!</h2>
+          <button className={styles.cancelButton} type="button" onClick={closeModal}>X</button>
+        </div>
+        <p className={styles.question}>Quando você quer que seu post seja publicado?</p>
         <DateTimePicker
           onChange={onChange}
           value={dateTimeValue}
@@ -59,14 +69,13 @@ function SchedulerModal({ resetEditor, disabled }: { resetEditor: () => void, di
           clearIcon={null}
           disableClock
         />
-        <button type="button" onClick={() => scheduleDateTime(dateTimeValue)}>
+        <button className={styles.confirmButton} type="button" onClick={() => scheduleDateTime(dateTimeValue)}>
           Agendar
         </button>
-        <button type="button" onClick={closeModal}>X</button>
         {
           scheduled && (
-            <p>
-              publicação agendada para:
+            <p className={styles.confirmation}>
+              Publicação agendada para:
               {' '}
               {scheduled}
             </p>

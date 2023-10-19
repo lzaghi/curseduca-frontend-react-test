@@ -48,6 +48,7 @@
 }
 
 .loginButton {
+  background: var(--main-blue);
   border: none;
   color: white;
   font-weight: 700;
@@ -56,12 +57,10 @@
 }
 
 .loginButton:disabled {
-  background: var(--main-blue);
   opacity: 0.5;
 }
 
 .loginButton:enabled {
-  background: var(--main-blue);
   cursor: pointer;
   opacity: 0.8;
 }

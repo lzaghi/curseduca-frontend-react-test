@@ -5,5 +5,13 @@
   flex-direction: column;
   height: 100vh;
   overflow: scroll;
-  padding: 30px;
+  overflow-x: hidden;
+  padding-bottom: 30px;
+}
+
+.feedLoader {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
